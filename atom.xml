@@ -2,14 +2,24 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://etyme.github.io</id>
     <title>Gridea</title>
-    <updated>2020-08-29T07:05:07.252Z</updated>
+    <updated>2021-07-09T07:41:11.296Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://etyme.github.io"/>
     <link rel="self" href="https://etyme.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://etyme.github.io/images/avatar.png</logo>
     <icon>https://etyme.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Gridea</rights>
+    <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[抵押签约材料-大额抵押签约手势（20210708）]]></title>
+        <id>https://etyme.github.io/post/di-ya-qian-yue-cai-liao-da-e-di-ya-qian-yue-shou-shi-20210708/</id>
+        <link href="https://etyme.github.io/post/di-ya-qian-yue-cai-liao-da-e-di-ya-qian-yue-shou-shi-20210708/">
+        </link>
+        <updated>2021-07-09T07:32:31.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://etyme.github.io/post-images/1625816358705.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://etyme.github.io/post-images/1625816156705.PNG" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[无抵押新定价]]></title>
         <id>https://etyme.github.io/post/wu-di-ya-xin-ding-jie/</id>
@@ -20,18 +30,6 @@
 <figure data-type="image" tabindex="1"><img src="https://etyme.github.io/post-images/1598671899041.JPG" alt="" loading="lazy"></figure>
 <h1 id="无抵押新形势下的展业获客">无抵押：新形势下的展业获客</h1>
 <figure data-type="image" tabindex="2"><img src="https://etyme.github.io/post-images/1598671949106.JPG" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[装修那些事]]></title>
-        <id>https://etyme.github.io/post/zhuang-xiu-na-xie-shi/</id>
-        <link href="https://etyme.github.io/post/zhuang-xiu-na-xie-shi/">
-        </link>
-        <updated>2020-08-29T01:15:16.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="玄关">玄关</h1>
-<h1 id="客厅">客厅</h1>
-<p>墙面使用太空漫步</p>
-<h1 id=""></h1>
 ]]></content>
     </entry>
     <entry>
