@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://etyme.github.io</id>
+    <title>etyme</title>
+    <updated>2024-05-12T06:22:40.447Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://etyme.github.io"/>
+    <link rel="self" href="https://etyme.github.io/atom.xml"/>
+    <subtitle>「求知若飢，虛心若愚。」（Stay hungry. Stay foolish.）
+
+</subtitle>
+    <logo>https://etyme.github.io/images/avatar.png</logo>
+    <icon>https://etyme.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2024, etyme</rights>
+    <entry>
+        <title type="html"><![CDATA[Infuse+阿里云盘教程，苹果用户最佳影视库]]></title>
+        <id>https://etyme.github.io/post/infusea-li-yun-pan-jiao-cheng-ping-guo-yong-hu-zui-jia-ying-shi-ku/</id>
+        <link href="https://etyme.github.io/post/infusea-li-yun-pan-jiao-cheng-ping-guo-yong-hu-zui-jia-ying-shi-ku/">
+        </link>
+        <updated>2023-09-20T13:23:33.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Alist+网盘，不用 NAS 也能打造影音库]]></title>
+        <id>https://etyme.github.io/post/alistwang-pan-bu-yong-nas-ye-neng-da-zao-ying-yin-ku/</id>
+        <link href="https://etyme.github.io/post/alistwang-pan-bu-yong-nas-ye-neng-da-zao-ying-yin-ku/">
+        </link>
+        <updated>2023-04-27T00:31:05.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[当Infuse遇上阿里云盘]]></title>
+        <id>https://etyme.github.io/post/dang-infuse-yu-shang-a-li-yun-pan/</id>
+        <link href="https://etyme.github.io/post/dang-infuse-yu-shang-a-li-yun-pan/">
+        </link>
+        <updated>2023-02-22T05:18:57.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[斐讯n1配置旁路由后无法访问网络]]></title>
+        <id>https://etyme.github.io/post/fei-xun-n1-pei-zhi-pang-lu-you-hou-wu-fa-fang-wen-wang-luo/</id>
+        <link href="https://etyme.github.io/post/fei-xun-n1-pei-zhi-pang-lu-you-hou-wu-fa-fang-wen-wang-luo/">
+        </link>
+        <updated>2023-02-18T11:56:33.000Z</updated>
+    </entry>
+</feed>

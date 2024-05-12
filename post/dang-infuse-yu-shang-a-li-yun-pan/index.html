@@ -1,0 +1,310 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>当Infuse遇上阿里云盘 | etyme</title>
+<link rel="shortcut icon" href="https://etyme.github.io/favicon.ico?v=1715494957544">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://etyme.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="当Infuse遇上阿里云盘 | etyme - Atom Feed" href="https://etyme.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="阿里云盘介绍
+阿里云盘是阿里巴巴全球资深技术团队倾力打造的一款个人网盘，主要功能为速度快、不打扰、够安全、易于分享，为C端用户提供存储备份及智能相册等服务的网盘产品。 最近一段时间阿里云盘可谓是火出了太阳系（还不是因为115太贵，百度网盘太..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://etyme.github.io">
+  <img class="avatar" src="https://etyme.github.io/images/avatar.png?v=1715494957544" alt="">
+  </a>
+  <h1 class="site-title">
+    etyme
+  </h1>
+  <p class="site-description">
+    「求知若飢，虛心若愚。」（Stay hungry. Stay foolish.）
+
+
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/etyme" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              当Infuse遇上阿里云盘
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-02-22
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="阿里云盘介绍">阿里云盘介绍</h2>
+<p>阿里云盘是阿里巴巴全球资深技术团队倾力打造的一款个人网盘，主要功能为速度快、不打扰、够安全、易于分享，为C端用户提供存储备份及智能相册等服务的网盘产品。 最近一段时间阿里云盘可谓是火出了太阳系（还不是因为115太贵，百度网盘太慢），各种资源无论是影视作品还是素材都在阿里云盘上层出不穷。</p>
+<h2 id="infuse介绍">Infuse介绍</h2>
+<p>相信家中有NAS的朋友应该对媒体管理软件并不陌生，因为除了数据储存之外，我们购买NAS很大一部分需求是储存和播放电影和电视剧。 Infuse在本质上是一个媒体管理软件，拥有类似于Netflix这样的页面，如果你没有NAS ，你也可以使用Emby、Jellyfin、Plex第三方流媒体服务，或者连接Google Drive这种网络硬盘。</p>
+<h2 id="准备工作">准备工作</h2>
+<ul>
+<li><a href="https://pages.aliyundrive.com/mobile-page/web/beinvited.html?code=4e06ec7">注册阿里云网盘账号</a></li>
+<li>你是Infuse的订阅用户</li>
+</ul>
+<h2 id="浏览器获取refreshtoken">浏览器获取refreshToken</h2>
+<ul>
+<li>列表项先通过浏览器（建议chrome）打开阿里云盘官网并登录：<a href="https://www.aliyundrive.com/drive/">www.aliyundrive.com</a></li>
+<li>列表项登录成功后，按F12打开开发者工具，点击<code>Console</code>，输入以下代码，并回车</li>
+</ul>
+<pre><code class="language-js">JSON.parse(window.localStorage.getItem(&quot;token&quot;))[&quot;refresh_token&quot;];
+</code></pre>
+<ul>
+<li>控制台输出的一串字符就是你的refreshToken啦</li>
+</ul>
+<figure data-type="image" tabindex="1"><a href="https://cdn.jsdelivr.net/gh/zxfccmm/image@master/20210714/WX20210818-142734.30bl1gsedly0.png"><img src="https://cdn.jsdelivr.net/gh/zxfccmm/image@master/20210714/WX20210818-142734.30bl1gsedly0.png" alt="WX20210818-142734" loading="lazy"></a></figure>
+<p>WX20210818-142734</p>
+<h2 id="使用docker创建阿里云盘的webdav服务">使用docker创建阿里云盘的Webdav服务</h2>
+<p>项目地址：<a href="https://github.com/zxbu/webdav-aliyundriver">zxbu/webdav-aliyundriver</a></p>
+<h2 id="docker-run运行">docker run运行</h2>
+<pre><code class="language-sh">docker run -d --name=webdav-aliyundriver --restart=always -p 8080:8080  -v /etc/localtime:/etc/localtime -v /etc/aliyun-driver/:/etc/aliyun-driver/ -e TZ=&quot;Asia/Shanghai&quot; -e ALIYUNDRIVE_REFRESH_TOKEN=&quot;your refreshToken&quot; -e ALIYUNDRIVE_AUTH_PASSWORD=&quot;admin&quot; -e JAVA_OPTS=&quot;-Xmx1g&quot; zx5253/webdav-aliyundriver
+
+# /etc/aliyun-driver/ 挂载卷自动维护了最新的refreshToken，建议挂载
+# ALIYUNDRIVE_AUTH_PASSWORD 是admin账户的密码，建议修改
+# JAVA_OPTS 可修改最大内存占用，比如 -e JAVA_OPTS=&quot;-Xmx512m&quot; 表示最大内存限制为512m
+
+</code></pre>
+<h2 id="docker-compose运行">docker-compose运行</h2>
+<pre><code class="language-yaml">version: '3'
+services:
+  webdav-aliyundriver:
+    image: zx5253/webdav-aliyundriver
+    container_name: webdav-aliyundriver
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./docker/etc/aliyun-driver/:/etc/aliyun-driver/
+    ports:
+      - &quot;1234:8080&quot;
+    tty: true
+    environment:
+      - TZ=Asia/Shanghai
+      - ALIYUNDRIVE_REFRESH_TOKEN=&lt;change me&gt;
+      - ALIYUNDRIVE_AUTH_PASSWORD=&lt;change me&gt;
+
+</code></pre>
+<h2 id="群晖教程">群晖教程</h2>
+<p><a href="https://www.ioiox.com/archives/142.html">群晖NAS高级服务 - 使用阿里云盘打造免费 WebDAV 服务</a></p>
+<h2 id="参数说明">参数说明</h2>
+<pre><code>--aliyundrive.refresh-token
+    阿里云盘的refreshToken，获取方式见下文
+--server.port
+    非必填，服务器端口号，默认为8080
+--aliyundrive.auth.enable=true
+    是否开启WebDav账户验证，默认开启
+--aliyundrive.auth.user-name=admin
+    WebDav账户，默认admin
+--aliyundrive.auth.password=admin
+    WebDav密码，默认admin
+
+</code></pre>
+<h2 id="使用infuse连接阿里云盘的webdav服务">使用Infuse连接阿里云盘的Webdav服务</h2>
+<figure data-type="image" tabindex="2"><a href="https://cdn.jsdelivr.net/gh/zxfccmm/image@master/20210714/WX20210818-145254.5yx0sn4d3yo0.png"><img src="https://cdn.jsdelivr.net/gh/zxfccmm/image@master/20210714/WX20210818-145254.5yx0sn4d3yo0.png" alt="WX20210818-145254" loading="lazy"></a></figure>
+<p>WX20210818-145254</p>
+<blockquote>
+<p>这里的用户名默认是admin，密码就是刚才设置的ALIYUNDRIVE_AUTH_PASSWORD</p>
+</blockquote>
+<blockquote>
+<p>路径不选择默认是根目录<code>/</code></p>
+</blockquote>
+<h2 id="连接成功">连接成功</h2>
+<figure data-type="image" tabindex="3"><a href="https://cdn.jsdelivr.net/gh/zxfccmm/image@master/20210714/1.6ypmc7596f80.png"><img src="https://cdn.jsdelivr.net/gh/zxfccmm/image@master/20210714/1.6ypmc7596f80.png" alt="1" loading="lazy"></a></figure>
+<p>1</p>
+<figure data-type="image" tabindex="4"><a href="https://cdn.jsdelivr.net/gh/zxfccmm/image@master/20210714/2.56xqgzws6980.png"><img src="https://cdn.jsdelivr.net/gh/zxfccmm/image@master/20210714/2.56xqgzws6980.png" alt="2" loading="lazy"></a></figure>
+<p>2</p>
+<figure data-type="image" tabindex="5"><a href="https://cdn.jsdelivr.net/gh/zxfccmm/image@master/20210714/3.4ssa681ndw80.png"><img src="https://cdn.jsdelivr.net/gh/zxfccmm/image@master/20210714/3.4ssa681ndw80.png" alt="3" loading="lazy"></a></figure>
+<p>3</p>
+<h2 id="最后分享">最后分享</h2>
+<p>最后分享一下我最近保存在阿里云盘上的一些资源</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:left">地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>爱情公寓4K全系列</td>
+<td style="text-align:left"><a href="https://www.aliyundrive.com/s/Rcb4VyVTNAH">https://www.aliyundrive.com/s/Rcb4VyVTNAH</a></td>
+</tr>
+<tr>
+<td>漫威全系列</td>
+<td style="text-align:left"><a href="https://www.aliyundrive.com/s/xkBaheim6U6">https://www.aliyundrive.com/s/xkBaheim6U6</a></td>
+</tr>
+<tr>
+<td>复联3+4 4K单文件60g+</td>
+<td style="text-align:left"><a href="https://www.aliyundrive.com/s/48vmGvstx9W">https://www.aliyundrive.com/s/48vmGvstx9W</a></td>
+</tr>
+<tr>
+<td>火影忍者4K</td>
+<td style="text-align:left"><a href="https://www.aliyundrive.com/s/ig4niUCh8Vw">https://www.aliyundrive.com/s/ig4niUCh8Vw</a></td>
+</tr>
+<tr>
+<td>迪士尼收藏版1</td>
+<td style="text-align:left"><a href="https://www.aliyundrive.com/s/VuzVnUdbaBz">https://www.aliyundrive.com/s/VuzVnUdbaBz</a></td>
+</tr>
+<tr>
+<td>迪士尼收藏版2</td>
+<td style="text-align:left"><a href="https://www.aliyundrive.com/s/1GHf8nHHA23">https://www.aliyundrive.com/s/1GHf8nHHA23</a></td>
+</tr>
+<tr>
+<td>迪士尼收藏版3</td>
+<td style="text-align:left"><a href="https://www.aliyundrive.com/s/zSRdbKiuj51">https://www.aliyundrive.com/s/zSRdbKiuj51</a></td>
+</tr>
+</tbody>
+</table>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E4%BB%8B%E7%BB%8D">阿里云盘介绍</a></li>
+<li><a href="#infuse%E4%BB%8B%E7%BB%8D">Infuse介绍</a></li>
+<li><a href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">准备工作</a></li>
+<li><a href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E8%8E%B7%E5%8F%96refreshtoken">浏览器获取refreshToken</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8docker%E5%88%9B%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E7%9A%84webdav%E6%9C%8D%E5%8A%A1">使用docker创建阿里云盘的Webdav服务</a></li>
+<li><a href="#docker-run%E8%BF%90%E8%A1%8C">docker run运行</a></li>
+<li><a href="#docker-compose%E8%BF%90%E8%A1%8C">docker-compose运行</a></li>
+<li><a href="#%E7%BE%A4%E6%99%96%E6%95%99%E7%A8%8B">群晖教程</a></li>
+<li><a href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E">参数说明</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8infuse%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E7%9A%84webdav%E6%9C%8D%E5%8A%A1">使用Infuse连接阿里云盘的Webdav服务</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F">连接成功</a></li>
+<li><a href="#%E6%9C%80%E5%90%8E%E5%88%86%E4%BA%AB">最后分享</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://etyme.github.io/post/fei-xun-n1-pei-zhi-pang-lu-you-hou-wu-fa-fang-wen-wang-luo/">
+              <h3 class="post-title">
+                斐讯n1配置旁路由后无法访问网络
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://etyme.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
